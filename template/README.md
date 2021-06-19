@@ -5,8 +5,6 @@ typescript template for shack.js
 ## init
 
 ```
-npx @shack-js/cli init my-app -t typescript
-cd my-app
 npm i
 ```
 
