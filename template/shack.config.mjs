@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 
 export default {
-  entry: './web/index.tsx',
+  entry: './web/index.ts',
   module: {
     rules: [
       {
