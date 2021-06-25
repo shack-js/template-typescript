@@ -1,15 +1,24 @@
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
+import { CleanWebpackPlugin } from 'clean-webpack-plugin'
+
 export default {
-  entry: './web/index.ts',
+  entry: './web/index.tsx',
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        loader: "ts-loader",
-        options: {
-          compilerOptions: {
-            module: "ESNext",
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-typescript',
+              '@babel/preset-env',
+            ],
+            plugins: [
+              "@babel/plugin-transform-runtime",
+            ]
           }
         }
       }
@@ -18,8 +27,11 @@ export default {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".mjs", ".cjs"]
   },
+  plugins: [
+    new CleanWebpackPlugin(),
+  ],
   output: {
     path: join(dirname(fileURLToPath(import.meta.url)), 'dist', 'web'),
-    filename: '[contenthash].js'
+    filename: '[name].[contenthash].js',
   }
 }
